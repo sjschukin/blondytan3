@@ -12,6 +12,7 @@
   "author": "Sergey Shchukin",
   "license": "ISC",
   "dependencies": {
-    "webpack": "^4.32.2"
-  }
+    "webpack": "^4.33.0"
+  },
+  "repository": "github:sjschukin/blondytan3"
 }
