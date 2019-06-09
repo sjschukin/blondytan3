@@ -1,0 +1,17 @@
+{
+  "name": "blondytan3",
+  "version": "3.0.0",
+  "description": "BlondyTan3 Drupal8 theme by Sergey Shchukin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "theme"
+  ],
+  "author": "Sergey Shchukin",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^4.32.2"
+  }
+}

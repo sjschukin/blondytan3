@@ -1,0 +1,108 @@
+// sjs
+// based on https://itchief.ru/bootstrap/build-project-with-gulp-v4
+
+// configuration
+import { task, src as _src, dest } from 'gulp';
+import plumber from 'gulp-plumber'; // display humanable exception
+import sass from 'gulp-sass'; // sass precompiler
+import rigger from 'gulp-rigger'; // build time include engine
+import mincss from 'gulp-clean-css'; // minify CSS
+import uglify from 'gulp-uglify'; // minify JS
+
+var srcPath = 'src';
+var buildPath = 'build/blondytan3';
+
+var path = {
+    root: {
+        src: 'src/',
+        build = 'build/blondytan3/',
+    },
+    src: {
+        styles: [
+            'scss/[^_]*.scss'
+        ],
+        js: [
+            'js/[^_]*.js'
+        ],
+        fonts: {
+            awesome: 'assets/src/bower_components/Font-Awesome/web-fonts-with-css/webfonts/fa-solid-900.*'
+        },
+        files: {
+            root: [
+                'src/blondytan3.breakpoints.yml',
+                'src/blondytan3.info.yml',
+                'src/blondytan3.libraries.yml',
+                'src/blondytan3.theme',
+            ]
+        }
+    },
+    build: {
+        styles: 'build/' + buildRootFolder + '/css/',
+        js: 'build/' + buildRootFolder + '/js/',
+        fonts: 'build/' + buildRootFolder + '/fonts/',
+    },
+    watch: {
+        styles: 'src/scss/*.scss',
+        js: 'src/*.js'
+    }
+};
+
+task('test', (done) => {
+    console.log(path.root.build);
+});
+
+task('default', (done) => {
+    console.log('Configuration:');
+    console.log(path);
+    console.log('Available commands:');
+    console.log('p:debug   - without minify files.');
+    console.log('p:release - with minify files.');
+    done();
+});
+
+task('p:debug', (done) => {
+    console.log('perform debug compilation ...');
+
+    // gulp.src(path.src.styles)
+    //     .pipe(plumber())
+    //     .pipe(sass().on('error', sass.logError))
+    //     .pipe(gulp.dest(path.build.styles));
+
+    _src(path.src.js)
+        .pipe(plumber())
+        .pipe(rigger())
+        .pipe(dest(path.build.js));
+    done();
+});
+
+task('p:release', (done) => {
+    //console.log('perform release compilation ...');
+
+    //console.log('styles preprocessing ...');
+    _src(path.src.styles)
+        .pipe(plumber())
+        .pipe(sass())
+        .pipe(mincss())
+        .pipe(dest(path.build.styles));
+    //console.log('success.');
+
+    //console.log('js preprocessing ...');
+    _src(path.src.js)
+        .pipe(plumber())
+        .pipe(rigger())
+        .pipe(uglify())
+        .pipe(dest(path.build.js));
+    //console.log('success.');
+    //console.log('release compilation completed.');
+    done();
+});
+
+// gulp.task('fonts:build', (done) => {
+//     gulp.src(path.src.fonts.awesome)
+//         .pipe(gulp.dest(path.build.fonts));
+//     done();
+// });
+
+// gulp.task('watch', () => {
+//     gulp.watch(path.watch.styles, ['styles:build']);
+// });

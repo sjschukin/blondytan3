@@ -1,0 +1,39 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "debug",
+            "type": "shell",
+            "command": "gulp p:debug",
+            "group": "build",
+            "isBackground": false,
+            "problemMatcher": []
+        },
+        {
+            "label": "release",
+            "type": "shell",
+            "command": "gulp p:release",
+            "group": "build",
+            "isBackground": false,
+            "problemMatcher": []
+        },
+        {
+            "label": "run local server",
+            "type": "shell",
+            "command": "sudo php-fpm7.2 -D && sudo service mysql start && sudo service nginx start",
+            "group": "none",
+            "isBackground": false,
+            "problemMatcher": []
+        },
+        {
+            "label": "test",
+            "type": "shell",
+            "command": "gulp test",
+            "group": "build",
+            "isBackground": false,
+            "problemMatcher": []
+        }
+    ]
+}

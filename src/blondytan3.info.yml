@@ -1,0 +1,20 @@
+name: BlondyTan3
+type: theme
+description: 'BlondyTan3 theme by sjs for ryazanszn.ru'
+core: 8.x
+version: 8.x-3.0
+base theme: false
+libraries:
+  - blondytan3/global-styling
+  - blondytan3/front-page
+regions:
+  primary_menu: 'Primary menu'
+  breadcrumb: 'Breadcrumb'
+  highlighted: 'Highlighted'
+  sidebar_first: 'Sidebar first'
+  content: 'Content'
+  sidebar_second: 'Sidebar second'
+  footer_left: 'Footer left'
+  footer_right: 'Footer right'
+  footer_bottom: 'Footer bottom'
+  

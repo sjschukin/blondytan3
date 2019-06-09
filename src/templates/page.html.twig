@@ -1,0 +1,86 @@
+{#
+/**
+ * @file
+ * Bartik's theme implementation to display a single page.
+ *
+ * The doctype, html, head and body tags are not in this template. Instead they
+ * can be found in the html.html.twig template normally located in the
+ * core/modules/system directory.
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - base_path: The base URL path of the Drupal installation. Will usually be
+ *   "/" unless you have installed Drupal in a sub-directory.
+ * - is_front: A flag indicating if the current page is the front page.
+ * - logged_in: A flag indicating if the user is registered and signed in.
+ * - is_admin: A flag indicating if the user has permission to access
+ *   administration pages.
+ *
+ * Site identity:
+ * - front_page: The URL of the front page. Use this instead of base_path when
+ *   linking to the front page. This includes the language domain or prefix.
+ *
+ * Page content (in order of occurrence in the default page.html.twig):
+ * - node: Fully loaded node, if there is an automatically-loaded node
+ *   associated with the page and the node ID is the second argument in the
+ *   page's path (e.g. node/12345 and node/12345/revisions, but not
+ *   comment/reply/12345).
+ *
+ * Regions:
+ * - page.primary_menu: Items for the primary menu region.
+ * - page.breadcrumb: Items for the breadcrumb region.
+ * - page.highlighted: Items for the highlighted region.
+ * - page.sidebar_first: Items for the first sidebar.
+ * - page.content: The main content of the current page.
+ * - page.sidebar_second: Items for the second sidebar.
+ * - page.footer_left: Items for the left column in the top footer row.
+ * - page.footer_right: Items for the right column in the top footer row.
+ * - page.footer_bottom: Items for the second footer column.
+ *
+ * @see template_preprocess_page()
+ * @see html.html.twig
+ */
+#}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="main-nav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="/">Логотип</a>
+        {{ page.primary_menu }}
+    </div>
+</nav>
+<div class="container page">
+  {{ page.breadcrumb }}
+  {{ page.highlighted }}
+  {{ page.help }}
+
+  {% set has_sidebar_first = page.sidebar_first|render|striptags|trim is not empty %}
+  {% set has_sidebar_second = page.sidebar_second|render|striptags|trim is not empty %}
+
+  {% if has_sidebar_first and has_sidebar_second %}
+    {% set content_class = 'col-md-7' %}
+  {% elseif has_sidebar_first or has_sidebar_second %}
+    {% set content_class = 'col-md-9' %}
+  {% else %}
+    {% set content_class = 'col-md' %}
+  {% endif %}
+  <div class="row">
+    <div class="{{ content_class }} order-md-2">
+      {{ page.content }}
+    </div>
+    {% if has_sidebar_first %}
+    <div class="col-md sidebar-first order-md-1">
+      {{ page.sidebar_first }}
+    </div>
+    {% endif %}
+    {% if has_sidebar_second %}
+    <div class="col-md sidebar-second order-md-3">
+      {{ page.sidebar_second }}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% if page.footer %}
+<footer>
+  {{ page.footer }}
+</footer>
+{% endif %}
